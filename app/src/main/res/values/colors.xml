@@ -4,9 +4,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="verde_principal">#1E6A3B</color>
-    <color name="texto_titulo">#1F2937</color>
-    <color name="texto_label">#374151</color>
+    <color name="cinza_titulo">#1F2937</color>
     <color name="cor_borda_campo">#D1D5DB</color>
-    <color name="cinza_botao_cancelar">#E5E7EB</color>
-    <color name="texto_botao_cancelar">#374151</color>
+    <color name="cinza">#374151</color>
+    <color name="vermelho">#D92525</color>
 </resources>
