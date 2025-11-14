@@ -3,6 +3,7 @@ package com.example.farmmanagement
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.farmmanagement.databinding.ItemSolicitacaoPendenteBinding
 
@@ -10,11 +11,11 @@ import com.example.farmmanagement.databinding.ItemSolicitacaoPendenteBinding
 class SolicitacoesAdapter(private val solicitacoes: List<Solicitacao>) :
     RecyclerView.Adapter<SolicitacoesAdapter.SolicitacaoViewHolder>() {
 
-    // 1. ViewHolder: Guarda as referências para os componentes de layout (TextViews, etc)
+    // 1. ViewHolder
     inner class SolicitacaoViewHolder(val binding: ItemSolicitacaoPendenteBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    // 2. onCreateViewHolder: Cria um novo "item" (card) inflando o layout XML
+    // 2. onCreateViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolicitacaoViewHolder {
         val binding = ItemSolicitacaoPendenteBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -24,12 +25,13 @@ class SolicitacoesAdapter(private val solicitacoes: List<Solicitacao>) :
         return SolicitacaoViewHolder(binding)
     }
 
-    // 3. getItemCount: Informa ao RecyclerView quantos itens existem na lista
+    // 3. getItemCount
     override fun getItemCount() = solicitacoes.size
 
-    // 4. onBindViewHolder: Pega os dados de um item e os exibe no layout
+    // 4. onBindViewHolder
     override fun onBindViewHolder(holder: SolicitacaoViewHolder, position: Int) {
         val solicitacao = solicitacoes[position]
+        // (A linha 'val context' foi movida para dentro do listener)
 
         with(holder.binding) {
             tvNomeFuncionario.text = solicitacao.nome
@@ -44,9 +46,21 @@ class SolicitacoesAdapter(private val solicitacoes: List<Solicitacao>) :
             }
 
             btnReprovar.setOnClickListener {
-                // TODO: Adicionar lógica real de reprovação
-                Toast.makeText(holder.itemView.context, "Reprovado: ${solicitacao.nome}", Toast.LENGTH_SHORT).show()
+                val context = holder.itemView.context // Pega o contexto
+
+                // 1. Pega o FragmentManager (o "gerente de pop-ups") da Activity
+                val fragmentManager = (context as? AppCompatActivity)?.supportFragmentManager
+
+                if (fragmentManager != null) {
+                    // 2. Cria e exibe o novo Dialog que acabamos de fazer
+                    val dialog = ReprovarSolicitacaoDialogFragment.newInstance(solicitacao.nome, solicitacao.data)
+                    dialog.show(fragmentManager, ReprovarSolicitacaoDialogFragment.TAG)
+                }
+
+                else {
+                    Toast.makeText(context, "Erro ao abrir dialog.", Toast.LENGTH_SHORT).show()
+                }
             }
-        }
+         }
     }
 }
