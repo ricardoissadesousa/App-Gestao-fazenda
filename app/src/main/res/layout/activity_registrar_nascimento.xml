@@ -22,7 +22,7 @@
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp"
-            android:textColor="@color/texto_titulo" />
+            android:textColor="@color/cinza_titulo" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_numero_brinco"
