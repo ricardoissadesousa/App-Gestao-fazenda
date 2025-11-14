@@ -8,7 +8,6 @@ import androidx.fragment.app.DialogFragment
 import com.example.farmmanagement.databinding.DialogReprovarSolicitacaoBinding
 
 class ReprovarSolicitacaoDialogFragment : DialogFragment() {
-
     private var _binding: DialogReprovarSolicitacaoBinding? = null
     private val binding get() = _binding!!
 
