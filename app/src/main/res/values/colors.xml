@@ -8,4 +8,13 @@
     <color name="cor_borda_campo">#D1D5DB</color>
     <color name="cinza">#374151</color>
     <color name="vermelho">#D92525</color>
+
+    <color name="status_aprovada_fundo">#DCFCE7</color>
+    <color name="status_aprovada_texto">#166534</color>
+    <color name="status_pendente_fundo">#FEF9C3</color>
+    <color name="status_pendente_texto">#713F12</color>
+    <color name="fundo_card_historico">#F9FAFB</color>
+
+    <color name="status_reprovada_fundo">#FEE2E2</color>
+    <color name="status_reprovada_texto">#991B1B</color>
 </resources>
