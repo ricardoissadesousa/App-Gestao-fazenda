@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/branco_fundo"
+    android:padding="16dp"
+    tools:context=".ControleFolgasFuncionarioActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Portal do Funcionário"
+            android:textColor="@color/preto_texto"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Controle de Folgas"
+            android:textColor="@color/cinza_texto_suave"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_funcionario_selecionado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Bruno"
+            android:minHeight="48dp"
+            android:background="@drawable/bg_input_field_default"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="@color/preto_texto"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/text_mes_ano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Setembro 2025"
+                    android:textColor="@color/preto_texto"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btn_mes_anterior"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentStart="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_arrow_down"
+                    android:rotation="90"
+                    android:contentDescription="Mês Anterior" />
+
+                <ImageButton
+                    android:id="@+id/btn_proximo_mes"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_arrow_down"
+                    android:rotation="-90"
+                    android:contentDescription="Próximo Mês" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="7"
+                android:layout_marginBottom="8dp">
+
+                <TextView style="@style/CalendarDayHeader" android:layout_width="0dp" android:layout_weight="1" android:text="Dom" />
+                <TextView style="@style/CalendarDayHeader" android:layout_width="0dp" android:layout_weight="1" android:text="Seg" />
+                <TextView style="@style/CalendarDayHeader" android:layout_width="0dp" android:layout_weight="1" android:text="Ter" />
+                <TextView style="@style/CalendarDayHeader" android:layout_width="0dp" android:layout_weight="1" android:text="Qua" />
+                <TextView style="@style/CalendarDayHeader" android:layout_width="0dp" android:layout_weight="1" android:text="Qui" />
+                <TextView style="@style/CalendarDayHeader" android:layout_width="0dp" android:layout_weight="1" android:text="Sex" />
+                <TextView style="@style/CalendarDayHeader" android:layout_width="0dp" android:layout_weight="1" android:text="Sáb" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_calendario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"
+
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="7"
+
+                tools:listitem="@layout/item_dia_calendario"
+                tools:itemCount="35" /> <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <LinearLayout style="@style/CalendarLegendGroup">
+                <View style="@style/CalendarLegendDot" android:backgroundTint="@color/cinza_borda" />
+                <TextView style="@style/CalendarLegendText" android:text="Disponível" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/CalendarLegendGroup">
+                <View style="@style/CalendarLegendDot" android:backgroundTint="@color/status_pendente_principal" />
+                <TextView style="@style/CalendarLegendText" android:text="Pendente" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/CalendarLegendGroup">
+                <View style="@style/CalendarLegendDot" android:backgroundTint="@color/status_aprovada_principal" />
+                <TextView style="@style/CalendarLegendText" android:text="Aprovada" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <LinearLayout style="@style/CalendarLegendGroup">
+                    <View style="@style/CalendarLegendDot" android:backgroundTint="@color/status_reprovada" />
+                    <TextView style="@style/CalendarLegendText" android:text="Reprovada" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/CalendarLegendGroup">
+                    <View style="@style/CalendarLegendDot" android:backgroundTint="@color/status_ocupado" />
+                    <TextView style="@style/CalendarLegendText" android:text="Ocupado" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="Minhas Solicitações"
+            android:textColor="@color/preto_texto"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="08/09/2025"
+                android:textColor="@color/preto_texto"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:paddingVertical="4dp"
+                android:paddingHorizontal="8dp"
+                android:text="aprovada"
+                android:textColor="@color/status_aprovada_principal"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_status_aprovada" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/text_data_pendente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="02/10/2025"
+                android:textColor="@color/preto_texto"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/text_status_pendente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/text_data_pendente"
+                android:layout_marginStart="16dp"
+                android:paddingVertical="4dp"
+                android:paddingHorizontal="8dp"
+                android:text="pendente"
+                android:textColor="@color/status_pendente_principal"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_status_pendente" />
+
+            <TextView
+                android:id="@+id/text_cancelar_solicitacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Cancelar Solicitação"
+                android:textColor="@color/vermelho"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

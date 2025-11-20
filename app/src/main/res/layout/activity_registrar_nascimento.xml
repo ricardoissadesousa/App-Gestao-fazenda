@@ -22,7 +22,7 @@
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp"
-            android:textColor="@color/cinza_titulo" />
+            android:textColor="@color/preto_texto" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_numero_brinco"
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Número / Brinco"
-            app:boxStrokeColor="@color/cor_borda_campo">
+            app:boxStrokeColor="@color/cinza_borda">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_numero_brinco"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Nome do Bezerro(a)"
-            app:boxStrokeColor="@color/cor_borda_campo">
+            app:boxStrokeColor="@color/cinza_borda">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_nome_bezerro"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Sexo"
-            app:boxStrokeColor="@color/cor_borda_campo">
+            app:boxStrokeColor="@color/cinza_borda">
 
             <AutoCompleteTextView
                 android:id="@+id/autocomplete_sexo"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Data de Nascimento"
-            app:boxStrokeColor="@color/cor_borda_campo">
+            app:boxStrokeColor="@color/cinza_borda">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_data_nascimento"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Número da Mãe"
-            app:boxStrokeColor="@color/cor_borda_campo">
+            app:boxStrokeColor="@color/cinza_borda">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_numero_mae"
@@ -117,8 +117,8 @@
             android:layout_marginTop="32dp"
             android:text="Registrar Nascimento"
             android:textSize="16sp"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/verde_principal"
+            android:textColor="@color/cinza_borda"
+            app:backgroundTint="@color/cor_primaria"
             app:cornerRadius="12dp" />
 
     </LinearLayout>
