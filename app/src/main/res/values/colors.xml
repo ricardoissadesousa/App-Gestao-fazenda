@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <color name="verde_principal">#1E6A3B</color>
-    <color name="cinza_titulo">#1F2937</color>
-    <color name="cor_borda_campo">#D1D5DB</color>
-    <color name="cinza">#374151</color>
-    <color name="vermelho">#D92525</color>
-
-    <color name="status_aprovada_fundo">#DCFCE7</color>
-    <color name="status_aprovada_texto">#166534</color>
-    <color name="status_pendente_fundo">#FEF9C3</color>
-    <color name="status_pendente_texto">#713F12</color>
-    <color name="fundo_card_historico">#F9FAFB</color>
-
-    <color name="status_reprovada_fundo">#FEE2E2</color>
-    <color name="status_reprovada_texto">#991B1B</color>
+    <color name="vermelho">#d40f0f</color>
+    <color name="cor_primaria">#1B5E20</color>
+    <color name="cor_secundaria">#388E3C</color>
+    <color name="preto_texto">#FF000000</color>
+    <color name="branco_fundo">#FFFFFFFF</color>
+    <color name="cinza_fundo_tela">#F5F5F5</color>
+    <color name="cinza_borda">#E0E0E0</color>
+    <color name="cinza_texto_suave">#555555</color>
+    <color name="cinza_calendario_desabilitado">#CCCCCC</color>
+    <color name="status_aprovada_principal">#4CAF50</color>
+    <color name="status_aprovada_fundo">#E8F5E9</color>
+    <color name="status_pendente_principal">#FFC107</color>
+    <color name="status_pendente_fundo">#FFFDE7</color>
+    <color name="status_reprovada">#F44336</color>
+    <color name="status_ocupado">#2196F3</color>
 </resources>

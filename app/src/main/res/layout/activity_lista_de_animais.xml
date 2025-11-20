@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ListaDeAnimaisActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Lista de Animais"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#FAFAFA"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="4dp">
+
+        <TextView
+            style="@style/TableHeaderText"
+            android:layout_weight="1"
+            android:text="NÚMERO" />
+
+        <TextView
+            style="@style/TableHeaderText"
+            android:layout_weight="2"
+            android:text="NOME" />
+
+        <TextView
+            style="@style/TableHeaderText"
+            android:layout_weight="1.5"
+            android:text="SEXO" />
+
+        <TextView
+            style="@style/TableHeaderText"
+            android:layout_weight="2"
+            android:text="NASCIMENTO" />
+
+        <TextView
+            style="@style/TableHeaderText"
+            android:layout_weight="2"
+            android:text="MÃE" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_lista_animais"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_animal_row"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+</LinearLayout>

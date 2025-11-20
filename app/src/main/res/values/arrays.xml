@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="equipamentos_array">
+        <item>Trator TL 75</item>
+        <item>Car FORD</item>
+        <item>TL 580</item>
+        <item>Outro...</item>
+    </string-array>
+</resources>

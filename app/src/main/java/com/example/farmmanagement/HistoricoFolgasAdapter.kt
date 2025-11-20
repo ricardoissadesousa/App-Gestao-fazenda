@@ -36,19 +36,19 @@ class HistoricoFolgasAdapter(private val historico: List<HistoricoFolga>) :
             when (item.status) {
                 StatusFolga.APROVADA -> {
                     tvStatus.text = "Aprovada"
-                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_aprovada_texto))
+                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_aprovada_principal))
                     tvStatus.background = ContextCompat.getDrawable(context, R.drawable.bg_status_aprovada)
                 }
 
                 StatusFolga.PENDENTE -> {
                     tvStatus.text = "Pendente"
-                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_pendente_texto))
+                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_pendente_principal))
                     tvStatus.background = ContextCompat.getDrawable(context, R.drawable.bg_status_pendente)
                 }
 
                 StatusFolga.REPROVADA -> {
                     tvStatus.text = "Reprovada" // ou "Cancelada"
-                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_reprovada_texto))
+                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_reprovada))
                     tvStatus.background = ContextCompat.getDrawable(context, R.drawable.bg_status_reprovada)
                 }
             }

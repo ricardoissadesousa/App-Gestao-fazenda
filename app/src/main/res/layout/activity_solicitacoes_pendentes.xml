@@ -15,7 +15,7 @@
         android:text="Solicitações Pendentes"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@color/cinza_titulo"
+        android:textColor="@color/preto_texto"
         android:padding="24dp" />
 
     <androidx.recyclerview.widget.RecyclerView

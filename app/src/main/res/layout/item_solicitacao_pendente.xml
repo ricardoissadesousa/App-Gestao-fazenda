@@ -23,7 +23,7 @@
             android:text="Christiano"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/cinza_titulo" />
+            android:textColor="@color/preto_texto" />
 
         <TextView
             android:id="@+id/tv_data_solicitacao"
@@ -32,7 +32,7 @@
             android:layout_marginTop="4dp"
             android:text="10/09/2025"
             android:textSize="14sp"
-            android:textColor="@color/cor_borda_campo" />
+            android:textColor="@color/cinza_texto_suave" />
 
         <TextView
             android:id="@+id/tv_motivo"
@@ -41,7 +41,7 @@
             android:layout_marginTop="2dp"
             android:text="Motivo: Consulta médica"
             android:textSize="14sp"
-            android:textColor="@color/cor_borda_campo" />
+            android:textColor="@color/cinza_texto_suave" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,8 +55,8 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:text="Aprovar"
-                android:textColor="@color/cor_borda_campo"
-                app:backgroundTint="@color/verde_principal"
+                android:textColor="@color/cinza_borda"
+                app:backgroundTint="@color/cor_primaria"
                 app:cornerRadius="10dp"
                 android:layout_marginEnd="8dp"/>
 
@@ -66,7 +66,7 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:text="Reprovar"
-                android:textColor="@color/cor_borda_campo"
+                android:textColor="@color/cinza_borda"
                 app:backgroundTint="@color/vermelho"
                 app:cornerRadius="10dp"
                 android:layout_marginStart="8dp"/>
