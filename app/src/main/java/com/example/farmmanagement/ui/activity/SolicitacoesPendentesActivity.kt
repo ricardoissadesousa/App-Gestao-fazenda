@@ -1,8 +1,10 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.farmmanagement.data.model.Solicitacao
 import com.example.farmmanagement.databinding.ActivitySolicitacoesPendentesBinding
+import com.example.farmmanagement.ui.adapter.SolicitacoesAdapter
 
 class SolicitacoesPendentesActivity : AppCompatActivity() {
 
@@ -27,8 +29,8 @@ class SolicitacoesPendentesActivity : AppCompatActivity() {
     private fun carregarSolicitacoes(): List<Solicitacao> {
         return listOf(
             Solicitacao("1", "Christiano", "10/09/2025", "Motivo: Consulta médica"),
-        Solicitacao("2", "Wanderley", "15/09/2025", "Motivo: N/A"), // Motivo não está no print, adicionei N/A
-        Solicitacao("3", "Bruno", "02/10/2025", "Motivo: Assuntos pessoais")
+            Solicitacao("2", "Wanderley", "15/09/2025", "Motivo: N/A"), // Motivo não está no print, adicionei N/A
+            Solicitacao("3", "Bruno", "02/10/2025", "Motivo: Assuntos pessoais")
         )
     }
 }

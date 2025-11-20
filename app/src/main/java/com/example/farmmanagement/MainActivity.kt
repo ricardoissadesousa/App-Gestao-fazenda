@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmmanagement.databinding.ActivityMainBinding // 1. Importar ViewBinding
+import com.example.farmmanagement.ui.activity.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.activity
 
 //noinspection SuspiciousImport
 import android.R

@@ -1,6 +1,4 @@
-package com.example.farmmanagement
-
-
+package com.example.farmmanagement.ui.activity
 
 import android.content.Intent
 import android.os.Bundle

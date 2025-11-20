@@ -1,4 +1,4 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.data.model
 
 // Enum para garantir que o status seja sempre um valor válido
 enum class StatusFolga {

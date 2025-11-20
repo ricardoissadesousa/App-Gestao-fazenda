@@ -1,4 +1,4 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.data.model
 
 data class Solicitacao(
     val id: String,

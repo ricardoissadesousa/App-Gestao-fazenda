@@ -22,22 +22,22 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:exported="false" />
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.activity.RegisterActivity"
             android:exported="false" />
 
 
         <activity
-            android:name=".HistoricoFolgasActivity"
+            android:name=".ui.activity.HistoricoFolgasActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistrarNascimentoActivity"
+            android:name=".ui.activity.RegistrarNascimentoActivity"
             android:exported="false" />
         <activity
-            android:name=".SolicitacoesPendentesActivity"
+            android:name=".ui.activity.SolicitacoesPendentesActivity"
             android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".DieselActivity"-->

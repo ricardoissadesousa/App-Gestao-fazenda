@@ -1,9 +1,12 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.farmmanagement.R
+import com.example.farmmanagement.data.model.HistoricoFolga
+import com.example.farmmanagement.data.model.StatusFolga
 import com.example.farmmanagement.databinding.ItemHistoricoFolgaBinding
 
 class HistoricoFolgasAdapter(private val historico: List<HistoricoFolga>) :

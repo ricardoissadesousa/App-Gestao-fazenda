@@ -1,10 +1,11 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.farmmanagement.R
 
 data class Animal(
     val numero: String,
