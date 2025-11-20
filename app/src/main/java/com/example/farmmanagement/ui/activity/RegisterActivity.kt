@@ -1,4 +1,4 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.activity
 
 import android.os.Bundle
 import android.util.Log

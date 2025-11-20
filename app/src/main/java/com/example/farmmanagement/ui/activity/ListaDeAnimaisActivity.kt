@@ -1,9 +1,11 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.farmmanagement.databinding.ActivityListaDeAnimaisBinding
+import com.example.farmmanagement.ui.adapter.Animal
+import com.example.farmmanagement.ui.adapter.AnimalAdapter
 
 class ListaDeAnimaisActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListaDeAnimaisBinding

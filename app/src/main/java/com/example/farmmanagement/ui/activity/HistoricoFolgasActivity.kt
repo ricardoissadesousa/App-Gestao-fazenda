@@ -1,8 +1,11 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.farmmanagement.data.model.HistoricoFolga
+import com.example.farmmanagement.data.model.StatusFolga
 import com.example.farmmanagement.databinding.ActivityHistoricoFolgasBinding
+import com.example.farmmanagement.ui.adapter.HistoricoFolgasAdapter
 
 class HistoricoFolgasActivity : AppCompatActivity() {
 

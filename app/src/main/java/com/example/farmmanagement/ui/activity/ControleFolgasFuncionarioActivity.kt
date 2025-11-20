@@ -1,10 +1,13 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.farmmanagement.data.model.CalendarDay
+import com.example.farmmanagement.data.model.FolgaStatus
 import com.example.farmmanagement.databinding.ActivityControleFolgasFuncionarioBinding
+import com.example.farmmanagement.ui.adapter.CalendarAdapter
 import java.util.*
 import java.text.SimpleDateFormat
 
@@ -46,9 +49,14 @@ class ControleFolgasFuncionarioActivity : AppCompatActivity() {
         adapter = CalendarAdapter(emptyList()) { day ->
             if (day.status == FolgaStatus.DISPONIVEL) {
                 // TODO: Abrir DialogFragment de Solicitação de Folga (Figura 6)
-                Toast.makeText(this, "Solicitar folga para: ${day.fullDate}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Solicitar folga para: ${day.fullDate}", Toast.LENGTH_SHORT)
+                    .show()
             } else {
-                Toast.makeText(this, "Dia ${day.fullDate} está como: ${day.status}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Dia ${day.fullDate} está como: ${day.status}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 

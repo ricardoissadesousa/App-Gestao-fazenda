@@ -1,10 +1,11 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 import android.app.AlertDialog
 import android.widget.TextView
+import com.example.farmmanagement.R
 import com.example.farmmanagement.databinding.ActivityControleDieselBinding
 
 class ControleDieselActivity : AppCompatActivity() {

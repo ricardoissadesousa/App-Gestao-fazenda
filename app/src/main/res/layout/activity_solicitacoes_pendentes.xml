@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F9FAFB"
-    tools:context=".SolicitacoesPendentesActivity">
+    tools:context=".ui.activity.SolicitacoesPendentesActivity">
 
     <TextView
         android:layout_width="wrap_content"

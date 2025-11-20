@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center"
-    tools:context=".RegisterActivity">
+    tools:context=".ui.activity.RegisterActivity">
 
     <TextView
         android:id="@+id/tv_register_title"

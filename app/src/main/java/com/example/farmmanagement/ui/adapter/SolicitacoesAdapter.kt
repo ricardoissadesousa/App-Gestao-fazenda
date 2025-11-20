@@ -1,10 +1,12 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.farmmanagement.ui.fragment.ReprovarSolicitacaoDialogFragment
+import com.example.farmmanagement.data.model.Solicitacao
 import com.example.farmmanagement.databinding.ItemSolicitacaoPendenteBinding
 
 // O adapter recebe a lista de dados
@@ -53,8 +55,8 @@ class SolicitacoesAdapter(private val solicitacoes: List<Solicitacao>) :
 
                 if (fragmentManager != null) {
                     // 2. Cria e exibe o novo Dialog que acabamos de fazer
-                    val dialog = ReprovarSolicitacaoDialogFragment.newInstance(solicitacao.nome, solicitacao.data)
-                    dialog.show(fragmentManager, ReprovarSolicitacaoDialogFragment.TAG)
+                    val dialog = ReprovarSolicitacaoDialogFragment.Companion.newInstance(solicitacao.nome, solicitacao.data)
+                    dialog.show(fragmentManager, ReprovarSolicitacaoDialogFragment.Companion.TAG)
                 }
 
                 else {

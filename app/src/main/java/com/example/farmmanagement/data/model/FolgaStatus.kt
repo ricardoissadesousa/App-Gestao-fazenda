@@ -1,4 +1,4 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.data.model
 
 // Enum para representar os estados possíveis de um dia
 enum class FolgaStatus {

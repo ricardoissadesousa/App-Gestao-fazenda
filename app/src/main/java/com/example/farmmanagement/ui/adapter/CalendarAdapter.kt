@@ -1,4 +1,4 @@
-package com.example.farmmanagement
+package com.example.farmmanagement.ui.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.farmmanagement.R
+import com.example.farmmanagement.data.model.CalendarDay
+import com.example.farmmanagement.data.model.FolgaStatus
 
 class CalendarAdapter(
     private var days: List<CalendarDay>,
