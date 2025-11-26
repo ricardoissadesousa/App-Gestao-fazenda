@@ -118,19 +118,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun redirecionarParaPainel(funcao: String?) {
-        // TODO: Substituir 'PrincipalGestorActivity' e 'PrincipalFuncionarioActivity' pelos nomes reais
         val intent = if (funcao == "gestor") {
-            // Intent(this, PrincipalGestorActivity::class.java)
-            Intent(this, SolicitacoesPendentesActivity::class.java) // Exemplo
+            // Vai para o painel do Gestor
+            Intent(this, PrincipalGestorActivity::class.java)
         } else {
-            // Intent(this, PrincipalFuncionarioActivity::class.java)
-            Intent(this, RegistrarNascimentoActivity::class.java) // Exemplo
+            //  vai para o novo Painel do Funcionário
+            Intent(this, PrincipalFuncionarioActivity::class.java)
         }
 
-        // Flags para limpar o histórico e não deixar o usuário voltar para o Login
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-        finish() // Destrói a LoginActivity
+        finish()
     }
 
 
