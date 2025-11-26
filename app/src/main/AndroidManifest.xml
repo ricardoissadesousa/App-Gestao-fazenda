@@ -39,14 +39,17 @@
         <activity
             android:name=".ui.activity.SolicitacoesPendentesActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activity.PrincipalGestorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.PrincipalFuncionarioActivity"
+            android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".DieselActivity"-->
 <!--            android:exported="false" />-->
 <!--        <activity-->
 <!--            android:name=".FolgasActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".PrincipalGestorActivity"-->
 <!--            android:exported="false" />-->
 <!--        <activity-->
 <!--            android:name=".ProducaoLeiteActivity"-->
