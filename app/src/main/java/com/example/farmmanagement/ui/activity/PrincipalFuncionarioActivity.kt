@@ -3,6 +3,7 @@ package com.example.farmmanagement.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.farmmanagement.MainActivity // Importe a MainActivity
 import com.example.farmmanagement.databinding.ActivityPrincipalFuncionarioBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -19,33 +20,25 @@ class PrincipalFuncionarioActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        // 1. Navegação para Controle de Folgas (Portal do Funcionário)
-        binding.cardFolgas.setOnClickListener {
-            // Esta activity já existe nos seus arquivos e é o "Portal do Funcionário"
-            startActivity(Intent(this, ControleFolgasFuncionarioActivity::class.java))
-        }
 
-        // 2. Navegação para Controle de Diesel
-        binding.cardDiesel.setOnClickListener {
-            startActivity(Intent(this, ControleDieselActivity::class.java))
-        }
+        binding.cardFolgas.setOnClickListener { startActivity(Intent(this, ControleFolgasFuncionarioActivity::class.java)) }
 
-        // 3. Navegação para Registrar Nascimento
-        binding.cardNascimento.setOnClickListener {
-            startActivity(Intent(this, RegistrarNascimentoActivity::class.java))
-        }
 
-        // 4. Navegação para Registrar Produção
-        binding.cardProducao.setOnClickListener {
-            startActivity(Intent(this, RegistrarProducaoDiariaActivity::class.java))
-        }
+        binding.cardDiesel.setOnClickListener { startActivity(Intent(this, ControleDieselActivity::class.java)) }
 
-        // Botão Sair
+        binding.cardNascimento.setOnClickListener { startActivity(Intent(this, RegistrarNascimentoActivity::class.java)) }
+        binding.cardProducao.setOnClickListener { startActivity(Intent(this, RegistrarProducaoDiariaActivity::class.java)) }
+
+        // BOTÃO SAIR
         binding.btnSair.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            val intent = Intent(this, LoginActivity::class.java)
-            // Limpa o histórico para não voltar
+
+            // Redireciona para a MainActivity (Tela de Escolha de Perfil)
+            val intent = Intent(this, MainActivity::class.java)
+
+            // Limpa o histórico de telas
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
             startActivity(intent)
             finish()
         }
