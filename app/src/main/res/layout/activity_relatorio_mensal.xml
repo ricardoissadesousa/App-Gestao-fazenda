@@ -131,7 +131,14 @@
                     android:text="R$ 2,85"
                     android:textColor="@android:color/black"
                     android:textSize="32sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:padding="8dp"
+                    android:drawableEnd="@android:drawable/ic_menu_edit"
+                    android:drawablePadding="8dp"
+                    android:contentDescription="Editar preço do leite" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
