@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -24,36 +26,48 @@
         <activity
             android:name=".ui.activity.LoginActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.activity.RegisterActivity"
             android:exported="false" />
 
-
-        <activity
-            android:name=".ui.activity.HistoricoFolgasActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.RegistrarNascimentoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activity.SolicitacoesPendentesActivity"
-            android:exported="false" />
         <activity
             android:name=".ui.activity.PrincipalGestorActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.PrincipalFuncionarioActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".DieselActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".FolgasActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".ProducaoLeiteActivity"-->
-<!--            android:exported="false" />-->
+
+        <activity
+            android:name=".ui.activity.RegistrarProducaoDiariaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.RelatorioMensalActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.ListaDeAnimaisActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.ControleDieselActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.ControleFolgasFuncionarioActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.HistoricoFolgasActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.RegistrarNascimentoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.SolicitacoesPendentesActivity"
+            android:exported="false" />
 
     </application>
 
