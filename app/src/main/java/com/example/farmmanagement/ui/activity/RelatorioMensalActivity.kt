@@ -1,7 +1,6 @@
 package com.example.farmmanagement.ui.activity
 
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
@@ -10,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.farmmanagement.databinding.ActivityRelatorioMensalBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import java.util.Calendar
 import java.util.Locale
 
@@ -18,9 +18,9 @@ class RelatorioMensalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRelatorioMensalBinding
     private val db = FirebaseFirestore.getInstance()
 
-    // Variáveis de Estado
-    private var precoLeiteAtual: Double = 2.85 // Valor padrão inicial
-    private var totalLitrosCache: Double = 0.0 // Guarda o total para recalcular sem ir no banco
+    //Variáveis de Estado
+    private var precoLeiteAtual: Double = 2.85 // Valor padrão
+    private var totalLitrosCache: Double = 0.0
 
     private val meses = arrayOf(
         "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -34,33 +34,45 @@ class RelatorioMensalActivity : AppCompatActivity() {
         binding = ActivityRelatorioMensalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 1. Recuperar o preço salvo na memória do celular (SharedPreferences)
-        val sharedPref = getSharedPreferences("ConfiguracoesFazenda", Context.MODE_PRIVATE)
-        // Se não tiver nada salvo, usa 2.85f
-        precoLeiteAtual = sharedPref.getFloat("preco_leite", 2.85f).toDouble()
 
-        // Define textos iniciais
         binding.textSelecaoMes.text = meses[mesSelecionadoIndex]
-        atualizarTextoPrecoUI() // Mostra o preço recuperado
+        atualizarTextoPrecoUI()
 
-        // Carrega dados
+        // Carregar o Preço do Firebase
+        carregarPrecoDoFirestore()
+
+        //Carregar Dados do Relatório
         loadReportData(mesSelecionadoIndex)
 
-        // LISTENERS (Cliques)
-
-        //  Trocar Mês
+        //LISTENERS
         binding.textSelecaoMes.setOnClickListener {
             showMonthSelectionDialog(binding.textSelecaoMes)
         }
 
-        // B. Editar Preço
         binding.textPrecoLeite.setOnClickListener {
             showEditPriceDialog()
         }
     }
 
+    private fun carregarPrecoDoFirestore() {
+        // Busca no documento 'configuracoes/fazenda'
+        db.collection("configuracoes").document("fazenda")
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists() && document.contains("preco_leite")) {
+                    val precoSalvo = document.getDouble("preco_leite")
+                    if (precoSalvo != null) {
+                        precoLeiteAtual = precoSalvo
+                        atualizarTextoPrecoUI()
+                        // Se já tivermos o total carregado, recalcula o faturamento
+                        if (totalLitrosCache > 0) recalcularFaturamento()
+                    }
+                }
+            }
+        // Se der erro ou não existir, mantém o padrão 2.85
+    }
+
     private fun loadReportData(mesIndex: Int) {
-        // Cálculo das datas
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.MONTH, mesIndex)
         calendar.set(Calendar.DAY_OF_MONTH, 1)
@@ -85,34 +97,21 @@ class RelatorioMensalActivity : AppCompatActivity() {
                     diasComRegistro++
                 }
 
-                // Salva no CACHE para podermos usar quando editar o preço
                 totalLitrosCache = totalLitros
-
-                // Cálculos
                 val media = if (diasComRegistro > 0) totalLitros / diasComRegistro else 0.0
 
-                // UI - ATUALIZADA COM PONTOS DE MILHAR
                 val localeBR = Locale("pt", "BR")
-
-                // Note o "%,.0f": a vírgula adiciona o separador de milhar (ponto)
                 binding.textTotalProduzido.text = String.format(localeBR, "%,.0f L", totalLitros)
                 binding.textMediaDiaria.text = String.format(localeBR, "%,.0f L", media)
 
-                // Recalcula o faturamento com o preço atual
                 recalcularFaturamento()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Erro ao carregar: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
-    // Função que abre o popup para digitar o preço
     private fun showEditPriceDialog() {
         val input = EditText(this)
         input.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         input.hint = "Ex: 3.10"
-
-
         input.setText(String.format(Locale.US, "%.2f", precoLeiteAtual))
 
         AlertDialog.Builder(this)
@@ -120,26 +119,11 @@ class RelatorioMensalActivity : AppCompatActivity() {
             .setMessage("Digite o novo valor do litro:")
             .setView(input)
             .setPositiveButton("Salvar") { dialog, _ ->
-                // Troca vírgula por ponto caso o teclado do usuário seja BR
                 val novoValorString = input.text.toString().replace(",", ".")
                 val novoValor = novoValorString.toDoubleOrNull()
 
                 if (novoValor != null && novoValor > 0) {
-                    // 1. Atualiza variável
-                    precoLeiteAtual = novoValor
-
-                    // 2. Salva
-                    val sharedPref = getSharedPreferences("ConfiguracoesFazenda", Context.MODE_PRIVATE)
-                    with(sharedPref.edit()) {
-                        putFloat("preco_leite", novoValor.toFloat())
-                        apply()
-                    }
-
-                    // 3. Atualiza a tela
-                    atualizarTextoPrecoUI()
-                    recalcularFaturamento()
-
-                    Toast.makeText(this, "Preço atualizado!", Toast.LENGTH_SHORT).show()
+                    salvarPrecoNoFirestore(novoValor)
                 } else {
                     Toast.makeText(this, "Valor inválido", Toast.LENGTH_SHORT).show()
                 }
@@ -149,12 +133,28 @@ class RelatorioMensalActivity : AppCompatActivity() {
             .show()
     }
 
+    private fun salvarPrecoNoFirestore(novoPreco: Double) {
+        precoLeiteAtual = novoPreco
+        atualizarTextoPrecoUI()
+        recalcularFaturamento()
+
+        // Salva no Firestore usando merge para não apagar outros dados (como a lista de veículos)
+        val dados = hashMapOf("preco_leite" to novoPreco)
+        db.collection("configuracoes").document("fazenda")
+            .set(dados, SetOptions.merge())
+            .addOnSuccessListener {
+                Toast.makeText(this, "Preço salvo na nuvem!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Erro ao salvar na nuvem.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun atualizarTextoPrecoUI() {
         val localeBR = Locale("pt", "BR")
         binding.textPrecoLeite.text = String.format(localeBR, "R$ %.2f", precoLeiteAtual)
     }
 
-    // Recalcula o faturamento instantaneamente usando o Cache + Preço Novo
     private fun recalcularFaturamento() {
         val faturamento = totalLitrosCache * precoLeiteAtual
         val localeBR = Locale("pt", "BR")

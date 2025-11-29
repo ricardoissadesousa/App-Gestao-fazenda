@@ -68,6 +68,9 @@
         <activity
             android:name=".ui.activity.SolicitacoesPendentesActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activity.HistoricoAbastecimentosActivity"
+            android:exported="false" />
 
     </application>
 
