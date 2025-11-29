@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#F5F5F5"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".ui.activity.ListaDeAnimaisActivity">
@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="Lista de Animais"
         android:textColor="@android:color/black"
         android:textSize="24sp"
@@ -22,47 +22,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#FAFAFA"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="4dp">
+        android:layout_marginBottom="12dp">
 
-        <TextView
-            style="@style/TableHeaderText"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view_animais"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="NÚMERO" />
+            android:background="@drawable/bg_input_field_default"
+            app:iconifiedByDefault="false"
+            app:queryHint="Buscar nº..." />
 
-        <TextView
-            style="@style/TableHeaderText"
-            android:layout_weight="2"
-            android:text="NOME" />
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_filtro_mes_nascimento"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_input_field_default"
+            android:paddingHorizontal="8dp"
+            android:spinnerMode="dropdown" />
 
-        <TextView
-            style="@style/TableHeaderText"
-            android:layout_weight="1.5"
-            android:text="SEXO" />
-
-        <TextView
-            style="@style/TableHeaderText"
-            android:layout_weight="2"
-            android:text="NASCIMENTO" />
-
-        <TextView
-            style="@style/TableHeaderText"
-            android:layout_weight="2"
-            android:text="MÃE" />
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E0E0E0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_lista_animais"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        tools:listitem="@layout/item_animal_row"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_animal_row" />
 
 </LinearLayout>

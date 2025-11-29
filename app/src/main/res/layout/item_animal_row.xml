@@ -1,49 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="4dp">
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/text_numero"
-            style="@style/TableRowText"
-            android:layout_weight="1"
-            android:text="20" />
+            android:id="@+id/tv_numero_brinco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="#105"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/cor_primaria"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_nome"
-            style="@style/TableRowText"
-            android:layout_weight="2"
-            android:text="N/A" />
+            android:id="@+id/tv_nome_animal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Mimosa"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toEndOf="@id/tv_numero_brinco"
+            app:layout_constraintEnd_toStartOf="@id/btn_editar"
+            app:layout_constraintTop_toTopOf="@id/tv_numero_brinco"
+            app:layout_constraintBottom_toBottomOf="@id/tv_numero_brinco"/>
 
         <TextView
-            android:id="@+id/text_sexo"
-            style="@style/TableRowText"
-            android:layout_weight="1.5"
-            android:text="Macho" />
+            android:id="@+id/tv_detalhes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Fêmea • Mãe: 2030 • Nasc: 12/01/2025"
+            android:textColor="#757575"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_numero_brinco"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_editar" />
 
-        <TextView
-            android:id="@+id/text_nascimento"
-            style="@style/TableRowText"
-            android:layout_weight="2"
-            android:text="14/01/25" />
+        <ImageView
+            android:id="@+id/btn_editar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_edit"
+            android:padding="8dp"
+            app:tint="#FF9800"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toStartOf="@id/btn_excluir"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TextView
-            android:id="@+id/text_mae"
-            style="@style/TableRowText"
-            android:layout_weight="2"
-            android:text="RAINHA" />
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/btn_excluir"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_delete"
+            android:padding="8dp"
+            app:tint="#F44336"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#F0F0F0" />
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
