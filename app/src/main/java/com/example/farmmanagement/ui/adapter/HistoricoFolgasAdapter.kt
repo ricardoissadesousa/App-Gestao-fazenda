@@ -1,8 +1,8 @@
 package com.example.farmmanagement.ui.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.farmmanagement.R
 import com.example.farmmanagement.data.model.HistoricoFolga
@@ -28,31 +28,29 @@ class HistoricoFolgasAdapter(private val historico: List<HistoricoFolga>) :
 
     override fun onBindViewHolder(holder: HistoricoViewHolder, position: Int) {
         val item = historico[position]
-        val context = holder.itemView.context
 
         with(holder.binding) {
-            // 1. Define os textos
             tvNomeFuncionario.text = item.nome
-            tvDataFolga.text = item.data
 
-            // 2. Lógica para mudar o badge de status
+
+            // Mostra a data no subtítulo (cinza)
+            tvDataFolga.text = "Solicitado para o dia: ${item.data}"
+
             when (item.status) {
                 StatusFolga.APROVADA -> {
                     tvStatus.text = "Aprovada"
-                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_aprovada_principal))
-                    tvStatus.background = ContextCompat.getDrawable(context, R.drawable.bg_status_aprovada)
+                    tvStatus.setTextColor(Color.parseColor("#1B5E20"))
+                    tvStatus.setBackgroundResource(R.drawable.bg_status_aprovada)
                 }
-
                 StatusFolga.PENDENTE -> {
                     tvStatus.text = "Pendente"
-                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_pendente_principal))
-                    tvStatus.background = ContextCompat.getDrawable(context, R.drawable.bg_status_pendente)
+                    tvStatus.setTextColor(Color.parseColor("#F57F17"))
+                    tvStatus.setBackgroundResource(R.drawable.bg_status_pendente)
                 }
-
                 StatusFolga.REPROVADA -> {
-                    tvStatus.text = "Reprovada" // ou "Cancelada"
-                    tvStatus.setTextColor(ContextCompat.getColor(context, R.color.status_reprovada))
-                    tvStatus.background = ContextCompat.getDrawable(context, R.drawable.bg_status_reprovada)
+                    tvStatus.text = "Recusada"
+                    tvStatus.setTextColor(Color.parseColor("#B71C1C"))
+                    tvStatus.setBackgroundResource(R.drawable.bg_status_reprovada)
                 }
             }
         }
