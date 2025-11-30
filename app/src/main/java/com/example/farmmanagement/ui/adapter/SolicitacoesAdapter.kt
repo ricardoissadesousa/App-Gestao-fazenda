@@ -5,19 +5,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.farmmanagement.ui.fragment.ReprovarSolicitacaoDialogFragment
 import com.example.farmmanagement.data.model.Solicitacao
 import com.example.farmmanagement.databinding.ItemSolicitacaoPendenteBinding
+import com.example.farmmanagement.ui.fragment.ReprovarSolicitacaoDialogFragment
+import com.google.firebase.firestore.FirebaseFirestore
 
-// O adapter recebe a lista de dados
-class SolicitacoesAdapter(private val solicitacoes: List<Solicitacao>) :
+// coloquei para MutableList para poder remover itens
+class SolicitacoesAdapter(private val solicitacoes: MutableList<Solicitacao>) :
     RecyclerView.Adapter<SolicitacoesAdapter.SolicitacaoViewHolder>() {
 
-    // 1. ViewHolder
     inner class SolicitacaoViewHolder(val binding: ItemSolicitacaoPendenteBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    // 2. onCreateViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolicitacaoViewHolder {
         val binding = ItemSolicitacaoPendenteBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -27,42 +26,53 @@ class SolicitacoesAdapter(private val solicitacoes: List<Solicitacao>) :
         return SolicitacaoViewHolder(binding)
     }
 
-    // 3. getItemCount
     override fun getItemCount() = solicitacoes.size
 
-    // 4. onBindViewHolder
     override fun onBindViewHolder(holder: SolicitacaoViewHolder, position: Int) {
         val solicitacao = solicitacoes[position]
-        // (A linha 'val context' foi movida para dentro do listener)
+        val context = holder.itemView.context
 
         with(holder.binding) {
-            tvNomeFuncionario.text = solicitacao.nome
-            tvDataSolicitacao.text = solicitacao.data
+            //Nome em cima, Email em baixo
+            tvNomeFuncionario.text = "${solicitacao.nome}\n${solicitacao.email}"
+
+            tvDataSolicitacao.text = "Data: ${solicitacao.data}"
             tvMotivo.text = solicitacao.motivo
 
-            // Ações dos botões
+            // APROVAR
             btnAprovar.setOnClickListener {
-                // TODO: Adicionar lógica real de aprovação
-                Toast.makeText(holder.itemView.context, "Aprovado: ${solicitacao.nome}", Toast.LENGTH_SHORT).show()
-                // Aqui você pode, por exemplo, remover o item da lista ou notificar a Activity
+                FirebaseFirestore.getInstance().collection("solicitacoes_folga")
+                    .document(solicitacao.id)
+                    .update("status", "APROVADA")
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Aprovada!", Toast.LENGTH_SHORT).show()
+                        removerItem(position) // Remove da tela
+                    }
             }
 
+            // REPROVAR
             btnReprovar.setOnClickListener {
-                val context = holder.itemView.context // Pega o contexto
-
-                // 1. Pega o FragmentManager (o "gerente de pop-ups") da Activity
                 val fragmentManager = (context as? AppCompatActivity)?.supportFragmentManager
-
                 if (fragmentManager != null) {
-                    // 2. Cria e exibe o novo Dialog que acabamos de fazer
-                    val dialog = ReprovarSolicitacaoDialogFragment.Companion.newInstance(solicitacao.nome, solicitacao.data)
-                    dialog.show(fragmentManager, ReprovarSolicitacaoDialogFragment.Companion.TAG)
-                }
+                    val dialog = ReprovarSolicitacaoDialogFragment.newInstance(
+                        solicitacao.id,
+                        solicitacao.nome,
+                        solicitacao.data
+                    )
+                    // Configura um callback para quando o dialog fechar com sucesso
 
-                else {
-                    Toast.makeText(context, "Erro ao abrir dialog.", Toast.LENGTH_SHORT).show()
+                    dialog.show(fragmentManager, ReprovarSolicitacaoDialogFragment.TAG)
                 }
             }
-         }
+        }
+    }
+
+    // Função auxiliar para remover item visualmente
+    fun removerItem(position: Int) {
+        if (position >= 0 && position < solicitacoes.size) {
+            solicitacoes.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, solicitacoes.size)
+        }
     }
 }
