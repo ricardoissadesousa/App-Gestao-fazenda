@@ -1,5 +1,6 @@
 package com.example.farmmanagement.ui.adapter
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ class AbastecimentoAdapter(private val lista: List<Abastecimento>) :
         return ViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = lista[position]
         val context = holder.itemView.context
@@ -69,3 +71,4 @@ class AbastecimentoAdapter(private val lista: List<Abastecimento>) :
 
     override fun getItemCount() = lista.size
 }
+

@@ -1,5 +1,6 @@
 package com.example.farmmanagement.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,9 +30,9 @@ class AnimalAdapter(
         return AnimalViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int) {
         val animal = listaAnimais[position]
-
 
         holder.tvNumero.text = animal.numero
 
