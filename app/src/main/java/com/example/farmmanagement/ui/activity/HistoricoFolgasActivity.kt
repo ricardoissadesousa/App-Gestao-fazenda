@@ -16,10 +16,10 @@ class HistoricoFolgasActivity : AppCompatActivity() {
         binding = ActivityHistoricoFolgasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 1. Prepara os dados (exemplo)
+        // 1. Prepara os dados
         val listaHistorico = carregarHistorico()
 
-        // 2. Cria o Adapter
+
         val adapter = HistoricoFolgasAdapter(listaHistorico)
 
         // 3. Conecta o Adapter ao RecyclerView

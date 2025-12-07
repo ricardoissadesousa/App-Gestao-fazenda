@@ -3,7 +3,7 @@ package com.example.farmmanagement.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.farmmanagement.MainActivity // Importe a MainActivity
+import com.example.farmmanagement.MainActivity
 import com.example.farmmanagement.databinding.ActivityPrincipalGestorBinding
 import com.google.firebase.auth.FirebaseAuth
 

@@ -25,7 +25,7 @@ class ControleDieselActivity : AppCompatActivity() {
         binding = ActivityControleDieselBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Carrega do Firestore (Banco de Dados)
+        // Carrega do Firestore
         carregarEquipamentosDoFirestore()
 
         setupEquipmentSelection()
@@ -110,7 +110,7 @@ class ControleDieselActivity : AppCompatActivity() {
         listaEquipamentos.add(nome)
         binding.textEquipamentoSelecionado.text = nome
 
-        // Adiciona no Firestore (ArrayUnion evita duplicatas e é eficiente)
+        // Adiciona no Firestore
         db.collection("configuracoes").document("fazenda")
             .update("veiculos", FieldValue.arrayUnion(nome))
             .addOnSuccessListener {
