@@ -2,56 +2,54 @@ package com.example.farmmanagement.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.farmmanagement.data.model.TipoUsuario
+import com.example.farmmanagement.data.repository.AuthRepository
+import com.example.farmmanagement.data.source.AuthDataSource
 import com.example.farmmanagement.databinding.ActivityLoginBinding
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
+import com.example.farmmanagement.ui.viewmodel.EstadoLogin
+import com.example.farmmanagement.ui.viewmodel.LoginViewModel
+import com.example.farmmanagement.ui.viewmodel.LoginViewModelFactory
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var auth: FirebaseAuth
-    private lateinit var db: FirebaseFirestore
-
     private var funcaoLogin: String? = null
+
+    private val viewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory(AuthRepository(AuthDataSource()))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 1. Inicializar Firebase
-        auth = Firebase.auth
-        db = Firebase.firestore
-
-        // 2. Pegar a "função" que foi clicada na MainActivity
         funcaoLogin = intent.getStringExtra("FUNCAO_LOGIN")
 
-        // 3. Atualizar o subtítulo
         if (funcaoLogin == "gestor") {
             binding.tvLoginSubtitle.text = "Acesso do Gestor"
         } else {
             binding.tvLoginSubtitle.text = "Acesso do Funcionário"
         }
 
-        // 4. Ação do Botão
+        configurarBotoes()
+        observarEstadoLogin()
+    }
+
+    private fun configurarBotoes() {
         binding.btnEntrar.setOnClickListener {
             fazerLogin()
         }
-        // 5. ADICIONE ESTA NOVA AÇÃO
+
         binding.tvIrParaCadastro.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-
             intent.putExtra("FUNCAO_CADASTRO", funcaoLogin)
-
             startActivity(intent)
         }
     }
@@ -60,70 +58,49 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
         val senha = binding.etPassword.text.toString()
 
-        if (email.isEmpty() || senha.isEmpty()) {
-            Toast.makeText(this, "Preencha todos os campos.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        setLoading(true)
-
-        // 5. Autenticar com Firebase Auth
-        auth.signInWithEmailAndPassword(email, senha)
-            .addOnSuccessListener { authResult ->
-                Log.d("LoginActivity", "Login Auth com sucesso.")
-                // 6. Auth deu certo! Agora verificar a função no Firestore
-                verificarFuncaoNoFirestore(authResult.user!!)
-            }
-            .addOnFailureListener { e ->
-                Log.w("LoginActivity", "Falha no Login Auth", e)
-                Toast.makeText(baseContext, "Email ou senha incorretos.", Toast.LENGTH_SHORT).show()
-                setLoading(false)
-            }
+        viewModel.login(email, senha)
     }
 
-    private fun verificarFuncaoNoFirestore(user: FirebaseUser) {
-        // 7. Buscar o documento do usuário no Firestore usando seu UID
-        db.collection("usuarios").document(user.uid).get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    // 8. Encontramos o usuário! Pegar a função real.
-                    val funcaoReal = document.getString("funcao")
-
-                    // 9. Comparar a função real com a função que ele tentou logar
-                    if (funcaoReal == funcaoLogin) {
-                        // SUCESSO! Acesso permitido.
-                        Log.d("LoginActivity", "Acesso permitido como $funcaoReal")
-                        redirecionarParaPainel(funcaoReal)
-                    } else {
-                        // Erro! O usuário é de outra função.
-                        Log.w("LoginActivity", "Acesso negado. Função real ($funcaoReal) diferente da tentada ($funcaoLogin)")
-                        Toast.makeText(this, "Acesso negado. Você não tem permissão de $funcaoLogin.", Toast.LENGTH_LONG).show()
-                        auth.signOut() // Deslogar o usuário
+    private fun observarEstadoLogin() {
+        lifecycleScope.launch {
+            viewModel.estadoLogin.collect { estado ->
+                when (estado) {
+                    is EstadoLogin.Inicial -> {
                         setLoading(false)
                     }
-                } else {
-                    // Erro! Usuário autenticado mas sem registro no Firestore
-                    Log.e("LoginActivity", "Usuário ${user.email} logado mas sem documento no Firestore.")
-                    Toast.makeText(this, "Erro de configuração de conta.", Toast.LENGTH_SHORT).show()
-                    auth.signOut()
-                    setLoading(false)
+                    is EstadoLogin.Carregando -> {
+                        setLoading(true)
+                    }
+                    is EstadoLogin.Sucesso -> {
+                        setLoading(false)
+                        val tipoUsuario = estado.usuario.tipo
+                        val tipoEsperado = if (funcaoLogin == "gestor") TipoUsuario.GESTOR else TipoUsuario.FUNCIONARIO
+
+                        if (tipoUsuario == tipoEsperado) {
+                            redirecionarParaPainel(tipoUsuario)
+                        } else {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                "Acesso negado. Você não tem permissão de $funcaoLogin.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            viewModel.logout()
+                        }
+                    }
+                    is EstadoLogin.Erro -> {
+                        setLoading(false)
+                        Toast.makeText(this@LoginActivity, estado.mensagem, Toast.LENGTH_SHORT).show()
+                        viewModel.limparErro()
+                    }
                 }
             }
-            .addOnFailureListener { e ->
-                Log.e("LoginActivity", "Erro ao buscar documento no Firestore", e)
-                Toast.makeText(this, "Erro ao verificar permissões.", Toast.LENGTH_SHORT).show()
-                auth.signOut()
-                setLoading(false)
-            }
+        }
     }
 
-    private fun redirecionarParaPainel(funcao: String?) {
-        val intent = if (funcao == "gestor") {
-            // Vai para o painel do Gestor
-            Intent(this, PrincipalGestorActivity::class.java)
-        } else {
-            //  vai para o novo Painel do Funcionário
-            Intent(this, PrincipalFuncionarioActivity::class.java)
+    private fun redirecionarParaPainel(tipo: TipoUsuario) {
+        val intent = when (tipo) {
+            TipoUsuario.GESTOR -> Intent(this, PrincipalGestorActivity::class.java)
+            TipoUsuario.FUNCIONARIO -> Intent(this, PrincipalFuncionarioActivity::class.java)
         }
 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

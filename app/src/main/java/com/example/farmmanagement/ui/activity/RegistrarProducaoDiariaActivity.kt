@@ -60,9 +60,9 @@ class RegistrarProducaoDiariaActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             ).apply {
-                setMargins(0, 0, 0, 48) // Margem inferior para não grudar
+                setMargins(0, 0, 0, 48)
             }
-            hint = "Tanque ${listaDeTanques.size + 1} (Litros)" // Ex: Tanque 4, Tanque 5...
+            hint = "Tanque ${listaDeTanques.size + 1} (Litros)"
             boxBackgroundMode = TextInputLayout.BOX_BACKGROUND_OUTLINE
             setBoxCornerRadii(20f, 20f, 20f, 20f) // Arredondamento igual ao XML
         }
