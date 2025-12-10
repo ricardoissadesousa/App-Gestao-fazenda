@@ -52,8 +52,8 @@ O sistema centraliza:
 ### 📱 Mobile (Android Nativo)
 - **Kotlin**
 - **MVVM**
-- **XML + ViewBinding**
-- **Coroutines & Flow**
+- **XML + ViewBinding**: XML para construção de layouts e ViewBinding para manipulação segura de Views, eliminando o risco de `NullPointerException` comum no antigo `findViewById`.
+- **Coroutines & Flow**: Coroutines evitam o travamento da UI durante chamadas de rede, e Flow permite observar mudanças no banco de dados em tempo real.
 
 ### ☁️ Back-end (Serverless)
 - **Firebase**
@@ -61,44 +61,41 @@ O sistema centraliza:
 - **Firebase Authentication**
 
 ### 🧰 Ferramentas
-- Gradle (Kotlin DSL)
-- Injeção manual: ViewModelFactory
+- **Gradle (Kotlin DSL)**: Sistema de build moderno configurado com scripts Kotlin (.kts) para melhor legibilidade.
+- **Injeção manual (ViewModelFactory)**: Padrão utilizado para injetar dependências (como Repositories) nas ViewModels, garantindo testabilidade e separação de responsabilidades.
 
 ---
 
 ## 📂 Estrutura de Diretórios
+
 ```text
 App-Gestao-fazenda/
-├── build.gradle.kts           # Configurações do projeto raiz
-├── app/                       # Módulo principal da aplicação
-│   ├── build.gradle.kts       # Dependências (Firebase, AndroidX, etc.)
-│   ├── google-services.json   # Configuração do Firebase
+├── build.gradle.kts           # Configurações globais do projeto (plugins, versões do Kotlin)
+├── app/                       # Módulo principal da aplicação Android
+│   ├── build.gradle.kts       # Declaração de dependências (Firebase, AndroidX, Material Design)
+│   ├── google-services.json   # Arquivo de configuração (credenciais) para conexão com o Firebase
 │   └── src/
 │       ├── main/
-│       │   ├── AndroidManifest.xml
+│       │   ├── AndroidManifest.xml # Manifesto: define permissões, Activities e metadados do app
 │       │   ├── java/com/example/farmmanagement/
-│       │   │   ├── data/                  # Camada de Dados
-│       │   │   │   ├── model/             # Classes de Dados (Animal, Producao, Usuario)
-│       │   │   │   ├── repository/        # Repositórios (Abstração de dados)
-│       │   │   │   └── source/            # Data Sources (Chamadas ao Firestore)
-│       │   │   └── ui/                    # Camada de Interface
-│       │   │       ├── activity/          # Telas (Activities)
-│       │   │       ├── adapter/           # Adaptadores para RecyclerViews
-│       │   │       ├── fragment/          # Fragmentos e Dialogs
-│       │   │       └── viewmodel/         # Gerenciamento de Estado (MVVM)
+│       │   │   ├── data/                  # CAMADA DE DADOS (Data Layer)
+│       │   │   │   ├── model/             # Classes de Dados: representam os objetos (ex: Animal, ProducaoLeite)
+│       │   │   │   ├── repository/        # Repositórios: centralizam a lógica de acesso a dados e decidem a fonte
+│       │   │   │   └── source/            # Data Sources: realizam as chamadas diretas à API do Firestore/Auth
+│       │   │   └── ui/                    # CAMADA DE INTERFACE (UI Layer)
+│       │   │       ├── activity/          # Activities: representam as telas principais (ex: LoginActivity, PrincipalGestorActivity)
+│       │   │       ├── adapter/           # Adapters: controlam as listas (RecyclerView) para exibição de dados (ex: AnimalAdapter)
+│       │   │       ├── fragment/          # Fragments/Dialogs: componentes modulares de UI (ex: Dialog para reprovar folga)
+│       │   │       └── viewmodel/         # ViewModels: gerenciam o estado da tela e comunicam com o repositório
 │       │   └── res/
-│       │       ├── layout/                # Arquivos XML de UI
-│       │       ├── drawable/              # Ícones e Backgrounds customizados
-│       │       ├── values/                # Strings, Cores e Temas
-│       │       └── mipmap/                # Ícones do App
-│       └── test/                          # Testes Unitários
-```
+│       │       ├── layout/                # Arquivos XML que definem a estrutura visual das telas
+│       │       ├── drawable/              # Recursos gráficos: ícones, vetores e backgrounds customizados
+│       │       ├── values/                # Recursos de valores: strings (textos), cores e temas do app
+│       │       └── mipmap/                # Ícones de lançamento do aplicativo (ícone da grade de apps)
+│       └── test/                          # Testes unitários para validar a lógica de negócios localmente
+##
 
----
-
-#---
-
-## 🌿 Estrutura de Branches
+🌿 Estrutura de Branches
 
 - **main** → versão estável do app integrada com Firebase  
 - **feature/*** → desenvolvimento de novas funcionalidades  
@@ -168,3 +165,4 @@ Clicar em Run (▶️)
     </td>
     
   </tr>
+
