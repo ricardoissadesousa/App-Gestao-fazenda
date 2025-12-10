@@ -78,21 +78,21 @@ App-Gestao-fazenda/
 │       ├── main/
 │       │   ├── AndroidManifest.xml # Manifesto: define permissões, Activities e metadados do app
 │       │   ├── java/com/example/farmmanagement/
-│       │   │   ├── data/                  # CAMADA DE DADOS (Data Layer)
-│       │   │   │   ├── model/             # Classes de Dados: representam os objetos (ex: Animal, ProducaoLeite)
-│       │   │   │   ├── repository/        # Repositórios: centralizam a lógica de acesso a dados e decidem a fonte
-│       │   │   │   └── source/            # Data Sources: realizam as chamadas diretas à API do Firestore/Auth
-│       │   │   └── ui/                    # CAMADA DE INTERFACE (UI Layer)
-│       │   │       ├── activity/          # Activities: representam as telas principais (ex: LoginActivity, PrincipalGestorActivity)
-│       │   │       ├── adapter/           # Adapters: controlam as listas (RecyclerView) para exibição de dados (ex: AnimalAdapter)
-│       │   │       ├── fragment/          # Fragments/Dialogs: componentes modulares de UI (ex: Dialog para reprovar folga)
-│       │   │       └── viewmodel/         # ViewModels: gerenciam o estado da tela e comunicam com o repositório
+│       │   │   ├── data/            # CAMADA DE DADOS (Data Layer)
+│       │   │   │   ├── model/       # Classes de Dados: representam os objetos (ex: Animal, ProducaoLeite)
+│       │   │   │   ├── repository/  # centralizam a lógica de acesso a dados e decidem a fonte
+│       │   │   │   └── source/      # Data Sources: realizam as chamadas diretas à API do Firestore/Auth
+│       │   │   └── ui/              # CAMADA DE INTERFACE
+│       │   │       ├── activity/    # representam as telas principais (ex: LoginActivity, PrincipalGestorActivity)
+│       │   │       ├── adapter/     # controlam as listas (RecyclerView) para exibição de dados (ex: AnimalAdapter)
+│       │   │       ├── fragment/    # componentes modulares de UI (ex: Dialog para reprovar folga)
+│       │   │       └── viewmodel/   # gerenciam o estado da tela e comunicam com o repositório
 │       │   └── res/
-│       │       ├── layout/                # Arquivos XML que definem a estrutura visual das telas
-│       │       ├── drawable/              # Recursos gráficos: ícones, vetores e backgrounds customizados
-│       │       ├── values/                # Recursos de valores: strings (textos), cores e temas do app
-│       │       └── mipmap/                # Ícones de lançamento do aplicativo (ícone da grade de apps)
-│       └── test/                          # Testes unitários para validar a lógica de negócios localmente
+│       │       ├── layout/          # Arquivos XML que definem a estrutura visual das telas
+│       │       ├── drawable/        # Recursos gráficos: ícones, vetores e backgrounds customizados
+│       │       ├── values/          # Recursos de valores: strings (textos), cores e temas do app
+│       │       └── mipmap/          # Ícones de lançamento do aplicativo (ícone da grade de apps)
+│       └── test/                    # Testes unitários para validar a lógica de negócios localmente
 ##
 
 🌿 Estrutura de Branches
@@ -165,4 +165,5 @@ Clicar em Run (▶️)
     </td>
     
   </tr>
+
 
